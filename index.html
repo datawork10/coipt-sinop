@@ -1,0 +1,792 @@
+<title>COIPT em Números</title>
+<meta name="description" content="Como a Coordenadoria de Infraestrutura, Patrimônio e TI da DRE Sinop sustenta convênios, manutenção, inventário, tecnologia e segurança das escolas estaduais.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#F6F9F8;
+  --surface:#FFFFFF;
+  --surface-2:#ECF3F1;
+  --surface-3:#E2ECE9;
+  --border:#DCE7E4;
+  --ink:#0F211D;
+  --ink-muted:#516663;
+  --ink-faint:#84948F;
+  --teal:#0BA69A;
+  --teal-text:#087F76;
+  --teal-soft:#E4F5F2;
+  --purple:#5B4FBE;
+  --purple-soft:#EEECFB;
+  --pink:#D14A6B;
+  --pink-soft:#FBEBEF;
+  --good:#1E8E5A;
+  --good-soft:#E6F5EC;
+  --warning:#A8670A;
+  --warning-soft:#FBF1DE;
+  --critical:#C13B52;
+  --critical-soft:#FBEAED;
+  --shadow: 0 1px 2px rgba(15,33,29,.04), 0 8px 24px -12px rgba(15,33,29,.12);
+  --radius: 14px;
+  --font-display:'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body:'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0A1613;
+    --surface:#0F1E1A;
+    --surface-2:#142B25;
+    --surface-3:#1A362E;
+    --border:#254A41;
+    --ink:#E9F3F0;
+    --ink-muted:#9FB9B2;
+    --ink-faint:#6E8983;
+    --teal:#2FC7B9;
+    --teal-text:#57DBCE;
+    --teal-soft:#123F39;
+    --purple:#9C93FF;
+    --purple-soft:#241F52;
+    --pink:#F17390;
+    --pink-soft:#4A1E2A;
+    --good:#3FBE84;
+    --good-soft:#123B2A;
+    --warning:#E2A93A;
+    --warning-soft:#3D2E10;
+    --critical:#EA6C82;
+    --critical-soft:#421E27;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0A1613;
+  --surface:#0F1E1A;
+  --surface-2:#142B25;
+  --surface-3:#1A362E;
+  --border:#254A41;
+  --ink:#E9F3F0;
+  --ink-muted:#9FB9B2;
+  --ink-faint:#6E8983;
+  --teal:#2FC7B9;
+  --teal-text:#57DBCE;
+  --teal-soft:#123F39;
+  --purple:#9C93FF;
+  --purple-soft:#241F52;
+  --pink:#F17390;
+  --pink-soft:#4A1E2A;
+  --good:#3FBE84;
+  --good-soft:#123B2A;
+  --warning:#E2A93A;
+  --warning-soft:#3D2E10;
+  --critical:#EA6C82;
+  --critical-soft:#421E27;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+  color-scheme: dark;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+  padding-inline:0;
+  margin:0;
+}
+img{max-width:100%;display:block}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;text-wrap:balance;margin:0;color:var(--ink)}
+p{margin:0}
+a{color:var(--teal-text)}
+.tabular{font-variant-numeric:tabular-nums}
+
+.wrap{max-width:1180px;margin-inline:auto;padding-inline:20px}
+@media (min-width:640px){.wrap{padding-inline:32px}}
+
+/* ============ NAV ============ */
+.nav{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:50;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{display:flex;align-items:center;gap:18px;height:60px;max-width:1180px;margin-inline:auto;padding-inline:20px}
+@media (min-width:640px){.nav-inner{padding-inline:32px}}
+.nav-brand{display:flex;align-items:center;gap:9px;font-family:var(--font-display);font-weight:600;font-size:1.02rem;flex:none;white-space:nowrap}
+.nav-brand img{height:28px;width:28px;border-radius:50%}
+.nav-links{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;-ms-overflow-style:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{
+  font-size:.82rem;font-weight:600;color:var(--ink-muted);text-decoration:none;
+  padding:8px 11px;border-radius:99px;white-space:nowrap;transition:background .15s,color .15s;
+}
+.nav-links a:hover{background:var(--surface-2);color:var(--ink)}
+.nav-links a.active{background:var(--teal-soft);color:var(--teal-text)}
+
+/* ============ HERO ============ */
+.hero{padding-block:44px 36px;border-bottom:1px solid var(--border)}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.hero-logos{display:flex;align-items:center;gap:14px}
+.hero-logos img{height:52px;width:52px;border-radius:50%;box-shadow:var(--shadow)}
+.hero-org{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+.hero-org strong{display:block;font-size:.95rem;letter-spacing:0;text-transform:none;color:var(--ink);font-family:var(--font-body);font-weight:700;margin-top:2px}
+.badge-public{
+  display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--teal-text);background:var(--teal-soft);border:1px solid color-mix(in srgb, var(--teal) 35%, transparent);
+  padding:6px 12px;border-radius:99px;
+}
+.badge-public::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.hero h1{font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.12;max-width:16ch}
+.hero .lede{font-size:1.05rem;line-height:1.6;color:var(--ink-muted);max-width:62ch;margin-top:16px}
+.hero-meta{margin-top:18px;font-size:.82rem;color:var(--ink-faint)}
+
+/* ============ KPI GRID ============ */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-top:28px}
+.kpi{background:var(--surface);padding:18px 18px 16px}
+.kpi .n{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.05rem);font-weight:600;line-height:1}
+.kpi .l{font-size:.76rem;color:var(--ink-muted);margin-top:7px;line-height:1.35;font-weight:600}
+
+/* smaller inline kpi strip used inside sections */
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-block:22px}
+.strip .k{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 14px;min-width:0}
+.strip .k .n{font-family:var(--font-display);font-size:clamp(1.05rem,2.1vw,1.35rem);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.strip .k .l{font-size:.72rem;color:var(--ink-muted);margin-top:4px;font-weight:600;line-height:1.3}
+
+/* Manutenção: fixed 4-column grid (two rows for 7 cards) so full values always fit, no shrinking/ellipsis */
+#manutKpis{grid-template-columns:repeat(4,1fr)}
+#manutKpis .k .n{font-size:1.15rem;white-space:normal;overflow:visible;text-overflow:clip;line-height:1.25;word-break:break-word}
+@media (max-width:720px){ #manutKpis{grid-template-columns:repeat(2,1fr)} }
+
+/* ============ SECTIONS ============ */
+section.block{padding-block:52px;border-bottom:1px solid var(--border)}
+section.block:last-of-type{border-bottom:none}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--teal-text);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+.block h2{font-size:clamp(1.5rem,3vw,1.95rem)}
+.block .intro{color:var(--ink-muted);max-width:68ch;margin-top:10px;line-height:1.6;font-size:.98rem}
+
+/* ============ CARDS / PASTA GROUPS ============ */
+.pasta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:26px}
+.pasta-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.pasta-card h3{font-size:1.05rem;display:flex;align-items:center;gap:9px;margin-bottom:4px}
+.pasta-swatch{width:10px;height:10px;border-radius:3px;flex:none}
+.pasta-count{font-size:.76rem;color:var(--ink-faint);font-weight:600;margin-bottom:14px}
+.proc-item{padding-block:10px;border-top:1px solid var(--border)}
+.proc-item:first-of-type{border-top:none;padding-top:2px}
+.proc-name{font-size:.87rem;font-weight:600;line-height:1.35}
+.proc-servidor{font-size:.76rem;color:var(--ink-muted);margin-top:3px}
+
+/* ============ BAR LIST (custom chart) ============ */
+.barlist{display:flex;flex-direction:column;gap:9px;margin-top:6px}
+.barrow{display:grid;grid-template-columns:minmax(90px,150px) 1fr auto;gap:10px;align-items:center;font-size:.8rem}
+.barrow .lbl{color:var(--ink-muted);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bartrack{background:var(--surface-3);border-radius:5px;height:10px;position:relative;overflow:hidden}
+.barfill{display:block;height:100%;border-radius:5px}
+.barrow .val{font-weight:700;font-variant-numeric:tabular-nums;min-width:2.4em;text-align:right}
+
+/* legend */
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px}
+.legend .item{display:flex;align-items:center;gap:7px;font-size:.78rem;color:var(--ink-muted);font-weight:600}
+.legend .sw{width:10px;height:10px;border-radius:3px;flex:none}
+
+/* ============ TABLE TOOLBAR ============ */
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px;margin-bottom:14px}
+.toolbar input[type="search"], .toolbar select{
+  font-family:var(--font-body);font-size:.85rem;padding:9px 13px;border-radius:9px;border:1px solid var(--border);
+  background:var(--surface);color:var(--ink);min-width:150px;
+}
+.toolbar input[type="search"]{flex:1;min-width:180px}
+.toolbar input:focus, .toolbar select:focus{outline:2px solid var(--teal);outline-offset:1px}
+.result-count{font-size:.76rem;color:var(--ink-faint);align-self:center;margin-left:auto;white-space:nowrap;font-weight:600}
+
+.table-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:.83rem;min-width:560px}
+thead th{
+  text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-faint);
+  padding:11px 14px;border-bottom:1px solid var(--border);white-space:nowrap;font-weight:700;background:var(--surface-2);
+  position:sticky;top:0;
+}
+tbody td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--ink)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--surface-2)}
+td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+td.muted{color:var(--ink-muted)}
+.empty-row td{text-align:center;padding:28px;color:var(--ink-faint)}
+
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:99px;white-space:nowrap;line-height:1.5}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+.pill.good{color:var(--good);background:var(--good-soft)}
+.pill.warning{color:var(--warning);background:var(--warning-soft)}
+.pill.critical{color:var(--critical);background:var(--critical-soft)}
+.pill.neutral{color:var(--ink-muted);background:var(--surface-3)}
+
+/* ============ STATUS LEGEND ============ */
+.status-legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:20px}
+.status-legend .s{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+.status-legend .s .pill{margin-bottom:6px}
+.status-legend .s p{font-size:.78rem;color:var(--ink-muted);line-height:1.4}
+
+/* ============ COVERAGE MINI-CARDS ============ */
+.cov-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:24px}
+.cov-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;display:flex;gap:14px;align-items:flex-start}
+.cov-n{font-family:var(--font-display);font-size:1.7rem;font-weight:600;color:var(--teal-text);flex:none;min-width:2.2ch}
+.cov-txt{font-size:.82rem;color:var(--ink-muted);line-height:1.4;padding-top:5px}
+
+/* ============ TEAM ============ */
+.team-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.team-chip{background:var(--surface);border:1px solid var(--border);border-radius:99px;padding:8px 14px 8px 8px;display:flex;align-items:center;gap:9px;font-size:.83rem}
+.team-avatar{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:#fff;flex:none}
+.team-chip .role{color:var(--ink-faint);font-size:.72rem;display:block}
+.team-chip .name{font-weight:700}
+
+/* ============ FOOTER ============ */
+footer{padding-block:40px;background:var(--surface-2)}
+.footer-inner{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+.footer-logos{display:flex;align-items:center;gap:16px}
+.footer-logos img{height:40px;width:40px;border-radius:50%}
+.footer-txt{font-size:.8rem;color:var(--ink-muted);line-height:1.6}
+.footer-txt strong{color:var(--ink)}
+
+::selection{background:var(--teal);color:#fff}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+@media (prefers-reduced-motion:no-preference){
+  .reveal{animation:rise .5s ease both}
+  @keyframes rise{from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)}}
+}
+</style>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand"><img src="coipt-claro.png" alt=""><span>COIPT</span></div>
+    <div class="nav-links" id="navLinks">
+      <a href="#panorama">Panorama</a>
+      <a href="#atuacao">Como atuamos</a>
+      <a href="#convenios">Convênios</a>
+      <a href="#manutencao">Manutenção</a>
+      <a href="#inventario">Patrimônio</a>
+      <a href="#tecnologia">Tecnologia</a>
+      <a href="#seguranca">Segurança</a>
+      <a href="#locacao">Locação</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="panorama">
+  <div class="wrap">
+    <div class="hero-top">
+      <div class="hero-logos">
+        <img src="coipt-claro.png" alt="Símbolo da COIPT">
+        <img src="dre-sinop.png" alt="Diretoria Regional de Educação de Sinop">
+        <div class="hero-org">DRE Sinop · SEDUC-MT<strong>Coordenadoria de Infraestrutura, Patrimônio e TI</strong></div>
+      </div>
+      <span class="badge-public">Painel público</span>
+    </div>
+    <h1>Como a COIPT-Sinop atua na manutenção e assessoramento de 58 escolas estaduais da regional</h1>
+    <p class="lede">Convênios de obras, manutenção corretiva, patrimônio, acervo de chromebooks, câmeras do Vigia + MT e contratos de locação de imóveis — os números e as listas por escola que compõem o trabalho da coordenadoria na Diretoria Regional de Educação de Sinop.</p>
+    <div class="kpi-grid" id="heroKpis"></div>
+    <p class="hero-meta" id="updateNote"></p>
+  </div>
+</header>
+
+<section class="block" id="atuacao">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Organização do trabalho</div>
+    <h2>Como atuamos</h2>
+    <p class="intro" id="atuacaoIntro">Os processos e produtos da COIPT são organizados primeiro por pasta de atuação e, dentro de cada uma, pelo servidor responsável — a mesma lógica usada internamente para dividir o trabalho da equipe.</p>
+    <div class="pasta-grid" id="pastaGrid"></div>
+    <p class="intro" style="margin-top:26px">Equipe da coordenadoria:</p>
+    <div class="team-row" id="teamRow"></div>
+  </div>
+</section>
+
+<section class="block" id="convenios">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Obras em unidades escolares</div>
+    <h2>Convênios</h2>
+    <p class="intro">Convênios de construção, ampliação e reforma monitorados pela COIPT, com o percentual de execução física reportado pelos fiscais de obra e a situação atual de cada contrato.</p>
+    <div class="strip" id="convKpis"></div>
+    <h3 style="font-size:.95rem;margin-top:8px">Convênios por situação</h3>
+    <div class="barlist" id="convSituacaoBars"></div>
+    <div class="toolbar">
+      <input type="search" id="convSearch" placeholder="Buscar por escola, município ou convênio…">
+      <select id="convMuniFilter"><option value="">Todos os municípios</option></select>
+      <span class="result-count" id="convCount"></span>
+    </div>
+    <div class="table-scroll">
+      <table id="convTable">
+        <thead><tr><th>Convênio</th><th>Município</th><th>Escola</th><th>Objeto</th><th>Situação</th><th>Execução</th><th>Previsão</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="manutencao">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Reparos e pequenos serviços</div>
+    <h2>Manutenção</h2>
+    <p class="intro">Solicitações de manutenção corretiva avaliadas pela equipe de engenharia entre janeiro e agosto de 2026.</p>
+    <div class="status-legend" id="statusLegend"></div>
+    <div class="strip" id="manutKpis"></div>
+    <h3 style="font-size:.95rem;margin-top:8px">Unidades com mais solicitações</h3>
+    <div class="barlist" id="manutTopBars"></div>
+    <div class="toolbar">
+      <input type="search" id="manutSearch" placeholder="Buscar por escola…">
+      <span class="result-count" id="manutCount"></span>
+    </div>
+    <div class="table-scroll">
+      <table id="manutTable">
+        <thead><tr><th>Unidade escolar</th><th>Solicitações</th><th>Aprovadas</th><th>Rejeitadas</th><th>Avaliadas — fora da prioridade</th><th>Valor total</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="inventario">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Bens móveis e inservíveis</div>
+    <h2>Patrimônio</h2>
+    <p class="intro">Controle patrimonial das unidades escolares, núcleos e diretoria regional em 2026: recebimento e registro de notas fiscais de aquisições de itens permanentes; atualização do Inventário de Bens Móveis; e processos de baixa patrimonial de bens inservíveis.</p>
+    <div class="strip" id="invKpis"></div>
+    <div class="toolbar">
+      <input type="search" id="invSearch" placeholder="Buscar por escola…">
+      <select id="invMuniFilter"><option value="">Todos os municípios</option></select>
+      <span class="result-count" id="invCount"></span>
+    </div>
+    <div class="table-scroll">
+      <table id="invTable">
+        <thead><tr><th>Unidade escolar</th><th>Município</th><th>Notas fiscais</th><th>Inventário Mobiliário</th><th>Inservíveis</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="tecnologia">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Acervo de equipamentos</div>
+    <h2>Tecnologia</h2>
+    <p class="intro">Chromebooks e gabinetes de recarga em operação nas escolas estaduais, base do programa de conectividade e uso pedagógico de tecnologia em sala de aula.</p>
+    <div class="strip" id="techKpis"></div>
+    <h3 style="font-size:.95rem;margin-top:8px">Maiores acervos por escola</h3>
+    <div class="barlist" id="techTopBars"></div>
+    <div class="toolbar">
+      <input type="search" id="techSearch" placeholder="Buscar por escola…">
+      <span class="result-count" id="techCount"></span>
+    </div>
+    <div class="table-scroll">
+      <table id="techTable">
+        <thead><tr><th>Unidade escolar</th><th>Chromebooks</th><th>Gabinetes</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="seguranca">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Vigia + MT</div>
+    <h2>Segurança</h2>
+    <p class="intro">Câmeras de monitoramento integradas ao programa estadual Vigia + MT, por escola e por município atendido.</p>
+    <div class="strip" id="segKpis"></div>
+    <h3 style="font-size:.95rem;margin-top:8px">Câmeras por município</h3>
+    <div class="barlist" id="segMuniBars"></div>
+    <div class="toolbar">
+      <input type="search" id="segSearch" placeholder="Buscar por escola…">
+      <span class="result-count" id="segCount"></span>
+    </div>
+    <div class="table-scroll">
+      <table id="segTable">
+        <thead><tr><th>Unidade escolar</th><th>Município</th><th>Câmeras integradas</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="locacao">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Imóveis alugados</div>
+    <h2>Locação de imóveis</h2>
+    <p class="intro">Contratos ativos de locação de imóveis que abrigam unidades escolares, com vigência e situação de pagamento.</p>
+    <div class="strip" id="locKpis"></div>
+    <div class="table-scroll">
+      <table id="locTable">
+        <thead><tr><th>Unidade / imóvel</th><th>Município</th><th>Processo</th><th>Vigência</th><th>Último pagamento</th><th>Tipo</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="border-bottom:none;padding-bottom:0">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Cobertura</div>
+    <h2>Pontos de atenção para expansão</h2>
+    <p class="intro">Onde a cobertura dos programas ainda pode crescer — um retrato rápido para orientar prioridades futuras, sem apontar unidades específicas.</p>
+    <div class="cov-grid" id="covGrid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="footer-logos">
+      <img src="coipt-escuro.png" alt="COIPT" style="display:none" id="logoDark">
+      <img src="coipt-claro.png" alt="COIPT" id="logoLight">
+      <img src="dre-sinop.png" alt="Diretoria Regional de Educação de Sinop">
+      <img src="govmt.png" alt="SEDUC-MT">
+    </div>
+    <p class="footer-txt"><strong>Coordenadoria de Infraestrutura, Patrimônio e TI</strong> · DRE Sinop · SEDUC-MT<br>Painel público de acompanhamento de processos e produtos. Dados de uso interno consolidados para consulta externa.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var mq = window.matchMedia('(prefers-color-scheme: dark)');
+  function syncLogo(){
+    var dark = document.documentElement.getAttribute('data-theme') === 'dark' || (!document.documentElement.hasAttribute('data-theme') && mq.matches);
+    document.getElementById('logoDark').style.display = dark ? '' : 'none';
+    document.getElementById('logoLight').style.display = dark ? 'none' : '';
+  }
+  syncLogo();
+  mq.addEventListener && mq.addEventListener('change', syncLogo);
+})();
+</script>
+
+<script>
+(function(){
+  "use strict";
+  function renderAll(DATA){
+
+  function esc(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  function fmtInt(n){ return Number(n||0).toLocaleString('pt-BR'); }
+  function fmtMoney(n){ return Number(n||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0}); }
+  function fmtPct(v){
+    var n = Number(v||0);
+    if (n <= 1) n = n*100;
+    return n.toLocaleString('pt-BR',{maximumFractionDigits:1}) + '%';
+  }
+  function kpiValue(item){
+    if (item.unidade === '%') return fmtPct(item.valor);
+    if (item.unidade === 'R$') return fmtMoney(item.valor);
+    return fmtInt(item.valor);
+  }
+  /* Rótulos ajustados para o público — o dado interno (indicador) não muda, só o texto exibido. */
+  var PUBLIC_LABEL = {
+    'Solicitações em análise': 'Avaliadas — fora da prioridade atual',
+    'Valor em análise': 'Valor avaliado — fora da prioridade',
+    'Valor total analisado': 'Valor total avaliado'
+  };
+  function plabel(name){ return PUBLIC_LABEL[name] || name; }
+
+  /* ---------- Hero KPIs ---------- */
+  (function(){
+    var order = ['Unidades escolares atendidas','Municípios atendidos','Convênios monitorados','Processos/produtos mapeados','Chromebooks em operação','Câmeras integradas'];
+    var all = [].concat(DATA.kpis['Panorama']||[], DATA.kpis['Convênios']||[], DATA.kpis['Tecnologia']||[], DATA.kpis['Segurança']||[]);
+    var byName = {}; all.forEach(function(i){ byName[i.indicador]=i; });
+    var html = order.map(function(name){
+      var it = byName[name]; if(!it) return '';
+      return '<div class="kpi reveal"><div class="n tabular">'+kpiValue(it)+'</div><div class="l">'+esc(plabel(name))+'</div></div>';
+    }).join('');
+    document.getElementById('heroKpis').innerHTML = html;
+  })();
+
+  document.getElementById('updateNote').textContent = 'Dados consolidados a partir de registros internos da COIPT. Última atualização: ' + (function(){
+    var d = new Date(DATA.atualizacao.replace(' ','T'));
+    if (isNaN(d)) return DATA.atualizacao;
+    return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
+  })() + '.';
+
+  /* ---------- Como atuamos: pasta / servidor ---------- */
+  (function(){
+    var colors = {'Patrimônio':'var(--teal)','Infraestrutura':'var(--purple)','Tecnologia':'var(--pink)'};
+    var groups = {};
+    var orderPastas = [];
+    DATA.organize.forEach(function(o){
+      if(!groups[o.pasta]){ groups[o.pasta]=[]; orderPastas.push(o.pasta); }
+      groups[o.pasta].push(o);
+    });
+    var html = orderPastas.map(function(p){
+      var items = groups[p];
+      var c = colors[p] || 'var(--teal)';
+      var rows = items.map(function(o){
+        return '<div class="proc-item"><div class="proc-name">'+esc(o.processo)+'</div><div class="proc-servidor">'+esc(o.servidor)+'</div></div>';
+      }).join('');
+      return '<div class="pasta-card reveal"><h3><span class="pasta-swatch" style="background:'+c+'"></span>'+esc(p)+'</h3><div class="pasta-count">'+items.length+' processos/produtos</div>'+rows+'</div>';
+    }).join('');
+    document.getElementById('pastaGrid').innerHTML = html;
+    document.getElementById('atuacaoIntro').textContent = 'Os ' + DATA.organize.length + ' processos e produtos da COIPT são organizados primeiro por pasta de atuação e, dentro de cada uma, pelo servidor responsável — a mesma lógica usada internamente para dividir o trabalho da equipe.';
+  })();
+
+  (function(){
+    var team = [
+      {n:'Norberto', r:'Coordenador', c:'var(--teal)'},
+      {n:'Hiago', r:'Engenheiro civil', c:'var(--purple)'},
+      {n:'Marcelo', r:'Engenheiro eletricista', c:'var(--purple)'},
+      {n:'Talison', r:'Engenheiro civil', c:'var(--purple)'},
+      {n:'Eduarda', r:'Estagiária de Eng. Civil', c:'var(--purple)'},
+      {n:'Jussara', r:'Técnica Administrativa', c:'var(--pink)'},
+      {n:'Itamar', r:'Técnico Administrativo', c:'var(--pink)'}
+    ];
+    document.getElementById('teamRow').innerHTML = team.map(function(t){
+      return '<div class="team-chip"><span class="team-avatar" style="background:'+t.c+'">'+esc(t.n[0])+'</span><span><span class="name">'+esc(t.n)+'</span><span class="role">'+esc(t.r)+'</span></span></div>';
+    }).join('');
+  })();
+
+  /* ---------- generic bar list ---------- */
+  function renderBars(container, rows, opts){
+    opts = opts || {};
+    var max = Math.max.apply(null, rows.map(function(r){return r.value;}).concat([1]));
+    container.innerHTML = rows.map(function(r){
+      var w = Math.max(3, Math.round(r.value/max*100));
+      return '<div class="barrow"><span class="lbl" title="'+esc(r.label)+'">'+esc(r.label)+'</span>'+
+        '<span class="bartrack"><span class="barfill" style="width:'+w+'%;background:'+(r.color||'var(--teal)')+'"></span></span>'+
+        '<span class="val tabular">'+ (opts.fmt ? opts.fmt(r.value) : fmtInt(r.value)) +'</span></div>';
+    }).join('');
+  }
+
+  /* ---------- generic filterable table ---------- */
+  function makeTable(cfg){
+    var rows = cfg.rows.slice();
+    var tbody = document.querySelector(cfg.table + ' tbody');
+    var searchEl = cfg.search ? document.getElementById(cfg.search) : null;
+    var filterEl = cfg.filterSelect ? document.getElementById(cfg.filterSelect) : null;
+    var countEl = cfg.count ? document.getElementById(cfg.count) : null;
+
+    if (filterEl && cfg.filterField){
+      var vals = Array.from(new Set(rows.map(function(r){return r[cfg.filterField];}))).filter(Boolean).sort(function(a,b){return a.localeCompare(b,'pt-BR');});
+      vals.forEach(function(v){
+        var o = document.createElement('option'); o.value=v; o.textContent=v; filterEl.appendChild(o);
+      });
+    }
+
+    function apply(){
+      var q = searchEl ? searchEl.value.trim().toLowerCase() : '';
+      var fv = filterEl ? filterEl.value : '';
+      var filtered = rows.filter(function(r){
+        if (fv && r[cfg.filterField] !== fv) return false;
+        if (!q) return true;
+        return cfg.searchFields.some(function(f){ return String(r[f]||'').toLowerCase().indexOf(q) !== -1; });
+      });
+      if (cfg.sortBy) filtered.sort(cfg.sortBy);
+      tbody.innerHTML = filtered.length ? filtered.map(cfg.rowHtml).join('') : '<tr class="empty-row"><td colspan="'+cfg.cols+'">Nenhum resultado encontrado.</td></tr>';
+      if (countEl) countEl.textContent = filtered.length + ' de ' + rows.length + ' registros';
+    }
+    if (searchEl) searchEl.addEventListener('input', apply);
+    if (filterEl) filterEl.addEventListener('change', apply);
+    apply();
+  }
+
+  /* ---------- CONVÊNIOS ---------- */
+  (function(){
+    var conv = DATA.kpis['Convênios'];
+    var byName = {}; conv.forEach(function(i){byName[i.indicador]=i;});
+    var order = ['Convênios monitorados','Convênios vigentes','Aguardando prestação de contas','Convênios encerrados','Obras em execução','Obras concluídas','Convênios em situação crítica','Execução física média'];
+    document.getElementById('convKpis').innerHTML = order.map(function(n){
+      var it = byName[n]; if(!it) return '';
+      return '<div class="k"><div class="n tabular">'+kpiValue(it)+'</div><div class="l">'+esc(plabel(n))+'</div></div>';
+    }).join('');
+
+    var counts = {};
+    DATA.convenios.forEach(function(c){ counts[c.situacao] = (counts[c.situacao]||0)+1; });
+    var palette = {'OBRA CONCLUÍDA':'var(--good)','OBRA EM EXECUÇÃO':'var(--teal)','EM RESCISÃO DE CONVÊNIO':'var(--critical)','CONTRATO RESCINDIDO':'var(--critical)'};
+    var bars = Object.keys(counts).sort(function(a,b){return counts[b]-counts[a];}).map(function(k){
+      return {label: k.charAt(0)+k.slice(1).toLowerCase(), value: counts[k], color: palette[k] || 'var(--purple)'};
+    });
+    renderBars(document.getElementById('convSituacaoBars'), bars);
+
+    function situPill(s){
+      var cls = 'neutral';
+      if (/conclu[íi]da/i.test(s)) cls='good';
+      else if (/execu[çc][ãa]o/i.test(s)) cls='neutral';
+      else if (/rescis|rescindido/i.test(s)) cls='critical';
+      return '<span class="pill '+cls+'">'+esc(s.charAt(0)+s.slice(1).toLowerCase())+'</span>';
+    }
+
+    makeTable({
+      rows: DATA.convenios,
+      table: '#convTable', search:'convSearch', filterSelect:'convMuniFilter', filterField:'municipio',
+      count:'convCount', searchFields:['escola','municipio','n','objeto'], cols:7,
+      sortBy: function(a,b){ return a.municipio.localeCompare(b.municipio,'pt-BR') || a.escola.localeCompare(b.escola,'pt-BR'); },
+      rowHtml: function(c){
+        return '<tr><td class="muted">'+esc(c.n)+'</td><td>'+esc(c.municipio)+'</td><td>'+esc(c.escola)+'</td><td class="muted">'+esc(c.objeto)+'</td><td>'+situPill(c.situacao)+'</td><td class="num">'+ (c.execucao!=null? c.execucao.toLocaleString('pt-BR',{maximumFractionDigits:1})+'%':'—') +'</td><td class="muted">'+esc(c.previsao)+'</td></tr>';
+      }
+    });
+  })();
+
+  /* ---------- MANUTENÇÃO ---------- */
+  (function(){
+    var m = DATA.kpis['Manutenção'];
+    var byName = {}; m.forEach(function(i){byName[i.indicador]=i;});
+    var order = ['Solicitações recebidas','Solicitações aprovadas','Solicitações rejeitadas','Solicitações em análise','Taxa de aprovação','Valor total analisado','Unidades atendidas'];
+    document.getElementById('manutKpis').innerHTML = order.map(function(n){
+      var it = byName[n]; if(!it) return '';
+      return '<div class="k"><div class="n tabular">'+kpiValue(it)+'</div><div class="l">'+esc(plabel(n))+'</div></div>';
+    }).join('');
+
+    document.getElementById('statusLegend').innerHTML = [
+      {cls:'good', label:'Aprovado', txt:'Orçamento aceito e seguindo para execução.'},
+      {cls:'neutral', label:'Avaliado — fora da prioridade atual', txt:'Já analisado pela engenharia e dentro do valor de mercado, mas sem prioridade de intervenção no momento.'},
+      {cls:'critical', label:'Rejeitado', txt:'Orçamento com valor incompatível com o mercado ou fora do escopo de manutenção corretiva.'}
+    ].map(function(s){
+      return '<div class="s"><span class="pill '+s.cls+'">'+esc(s.label)+'</span><p>'+esc(s.txt)+'</p></div>';
+    }).join('');
+
+    var top = DATA.manutencao.slice(0,8).map(function(u){ return {label:u.escola, value:u.total}; });
+    renderBars(document.getElementById('manutTopBars'), top, {fmt:fmtInt});
+
+    makeTable({
+      rows: DATA.manutencao, table:'#manutTable', search:'manutSearch', count:'manutCount',
+      searchFields:['escola'], cols:6,
+      sortBy: function(a,b){ return b.total - a.total; },
+      rowHtml: function(u){
+        return '<tr><td>'+esc(u.escola)+'</td><td class="num">'+fmtInt(u.total)+'</td><td class="num">'+fmtInt(u.aprovado)+'</td><td class="num">'+fmtInt(u.rejeitado)+'</td><td class="num">'+fmtInt(u.analisado)+'</td><td class="num">'+fmtMoney(u.valorTotal)+'</td></tr>';
+      }
+    });
+  })();
+
+  /* ---------- INVENTÁRIO ---------- */
+  (function(){
+    var inv = DATA.kpis['Inventário'];
+    var byName = {}; inv.forEach(function(i){byName[i.indicador]=i;});
+    var order = ['Unidades no inventário 2026','NF enviadas ao NPM','NF paradas na escola','Inservíveis com SIGADOC tramitado','Inservíveis não iniciados','Conclusão do inventário mobiliário'];
+    document.getElementById('invKpis').innerHTML = order.map(function(n){
+      var it = byName[n]; if(!it) return '';
+      return '<div class="k"><div class="n tabular">'+kpiValue(it)+'</div><div class="l">'+esc(plabel(n))+'</div></div>';
+    }).join('');
+
+    function nfPill(s){
+      var cls='neutral';
+      if(/enviado ao npm/i.test(s)) cls='good';
+      else if(/parado na escola/i.test(s)) cls='warning';
+      else if (/aguardando/i.test(s)) cls='neutral';
+      return '<span class="pill '+cls+'">'+esc(s)+'</span>';
+    }
+
+    function statusPill(s){
+      var l = (s||'').toLowerCase();
+      var cls='neutral';
+      if(/tramitado/.test(l)) cls='good';
+      else if(/devolvid|não iniciado|nao iniciado/.test(l)) cls='warning';
+      else if(/recebid|enviad|classifica|planilha/.test(l)) cls='neutral';
+      return '<span class="pill '+cls+'">'+esc(s)+'</span>';
+    }
+
+    makeTable({
+      rows: DATA.inventario, table:'#invTable', search:'invSearch', filterSelect:'invMuniFilter', filterField:'municipio',
+      count:'invCount', searchFields:['escola','municipio'], cols:5,
+      sortBy: function(a,b){ return a.municipio.localeCompare(b.municipio,'pt-BR') || a.escola.localeCompare(b.escola,'pt-BR'); },
+      rowHtml: function(r){
+        return '<tr><td>'+esc(r.escola)+'</td><td class="muted">'+esc(r.municipio)+'</td><td>'+nfPill(r.nf)+'</td><td>'+statusPill(r.mobiliario)+'</td><td>'+statusPill(r.inservivel)+'</td></tr>';
+      }
+    });
+  })();
+
+  /* ---------- TECNOLOGIA ---------- */
+  (function(){
+    var t = DATA.kpis['Tecnologia'];
+    var byName = {}; t.forEach(function(i){byName[i.indicador]=i;});
+    var order = ['Chromebooks em operação','Gabinetes de recarga'];
+    document.getElementById('techKpis').innerHTML = order.map(function(n){
+      var it = byName[n]; if(!it) return '';
+      return '<div class="k"><div class="n tabular">'+kpiValue(it)+'</div><div class="l">'+esc(plabel(n))+'</div></div>';
+    }).join('');
+
+    var top = DATA.chromebooks.slice().sort(function(a,b){return b.chromebooks-a.chromebooks;}).slice(0,8)
+      .map(function(c){ return {label:c.escola, value:c.chromebooks, color:'var(--pink)'}; });
+    renderBars(document.getElementById('techTopBars'), top);
+
+    makeTable({
+      rows: DATA.chromebooks, table:'#techTable', search:'techSearch', count:'techCount',
+      searchFields:['escola'], cols:3,
+      sortBy: function(a,b){ return b.chromebooks - a.chromebooks; },
+      rowHtml: function(c){
+        return '<tr><td>'+esc(c.escola)+'</td><td class="num">'+fmtInt(c.chromebooks)+'</td><td class="num">'+fmtInt(c.gabinetes)+'</td></tr>';
+      }
+    });
+  })();
+
+  /* ---------- SEGURANÇA ---------- */
+  (function(){
+    var s = DATA.kpis['Segurança'];
+    var byName = {}; s.forEach(function(i){byName[i.indicador]=i;});
+    var order = ['Unidades no Vigia Mais MT','Câmeras integradas'];
+    document.getElementById('segKpis').innerHTML = order.map(function(n){
+      var it = byName[n]; if(!it) return '';
+      return '<div class="k"><div class="n tabular">'+kpiValue(it)+'</div><div class="l">'+esc(plabel(n))+'</div></div>';
+    }).join('');
+
+    var byMuni = {};
+    DATA.vigia.forEach(function(v){ byMuni[v.municipio] = (byMuni[v.municipio]||0) + v.cameras; });
+    var bars = Object.keys(byMuni).sort(function(a,b){return byMuni[b]-byMuni[a];}).slice(0,10)
+      .map(function(k){ return {label:k, value:byMuni[k], color:'var(--purple)'}; });
+    renderBars(document.getElementById('segMuniBars'), bars);
+
+    makeTable({
+      rows: DATA.vigia, table:'#segTable', search:'segSearch', count:'segCount',
+      searchFields:['escola','municipio'], cols:3,
+      sortBy: function(a,b){ return b.cameras - a.cameras; },
+      rowHtml: function(v){
+        return '<tr><td>'+esc(v.escola)+'</td><td class="muted">'+esc(v.municipio)+'</td><td class="num">'+fmtInt(v.cameras)+'</td></tr>';
+      }
+    });
+  })();
+
+  /* ---------- LOCAÇÃO ---------- */
+  (function(){
+    var l = DATA.kpis['Locação'];
+    var byName = {}; l.forEach(function(i){byName[i.indicador]=i;});
+    var order = ['Contratos de locação ativos','Vigências a vencer em 90 dias','Processos em instrução'];
+    document.getElementById('locKpis').innerHTML = order.map(function(n){
+      var it = byName[n]; if(!it) return '';
+      return '<div class="k"><div class="n tabular">'+kpiValue(it)+'</div><div class="l">'+esc(plabel(n))+'</div></div>';
+    }).join('');
+
+    var tbody = document.querySelector('#locTable tbody');
+    tbody.innerHTML = DATA.locacao.map(function(r){
+      return '<tr><td>'+esc(r.escola)+'</td><td class="muted">'+esc(r.municipio)+'</td><td class="muted">'+esc(r.processo)+'</td><td>'+esc(r.vigencia)+'</td><td class="muted">'+esc(r.ultimoPagamento)+'</td><td><span class="pill neutral">'+esc(r.tipo)+'</span></td></tr>';
+    }).join('');
+  })();
+
+  /* ---------- COBERTURA ---------- */
+  (function(){
+    var c = DATA.kpis['Cobertura'];
+    var byName = {}; c.forEach(function(i){byName[i.indicador]=i;});
+    var items = [
+      {k:'UEs fora do Vigia Mais MT', t:'unidades ainda sem câmeras integradas ao programa estadual — candidatas naturais à próxima fase de expansão.'},
+      {k:'UEs sem solicitação de manutenção', t:'unidades que não abriram solicitação de manutenção corretiva no período — sinal a confirmar junto às direções.'},
+      {k:'UEs com parque de chromebooks', label:'UEs com acervo de chromebooks', t:'unidades escolares já equipadas com Chromebooks e gabinete de recarga em operação.'}
+    ];
+    document.getElementById('covGrid').innerHTML = items.map(function(i){
+      var it = byName[i.k];
+      return '<div class="cov-card"><div class="cov-n tabular">'+ (it? fmtInt(it.valor):'—') +'</div><div class="cov-txt"><strong style="color:var(--ink);display:block;margin-bottom:2px;font-size:.85rem">'+esc(i.label||i.k)+'</strong>'+i.t+'</div></div>';
+    }).join('');
+  })();
+
+  }
+
+  /* ---------- nav active state on scroll ---------- */
+  (function(){
+    var links = Array.from(document.querySelectorAll('#navLinks a'));
+    var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+    function onScroll(){
+      var y = window.scrollY + 120;
+      var current = sections[0];
+      sections.forEach(function(s){ if (s.offsetTop <= y) current = s; });
+      links.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === '#'+current.id); });
+    }
+    document.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+  })();
+
+  fetch('data.json').then(function(r){ return r.json(); }).then(renderAll).catch(function(err){
+    console.error('Erro ao carregar data.json', err);
+  });
+})();
+</script>

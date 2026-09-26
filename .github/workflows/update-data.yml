@@ -1,0 +1,59 @@
+name: Atualizar dados da COIPT e publicar no GitHub Pages
+
+on:
+  schedule:
+    # Executa a cada 6 horas (ajuste conforme a frequência que desejar).
+    # Horário em UTC. Mato Grosso é UTC-4, então "0 */6 * * *" roda às
+    # 20h, 2h, 8h e 14h no horário de MT.
+    - cron: "0 */6 * * *"
+  workflow_dispatch: {}   # permite rodar manualmente pela aba "Actions" no GitHub
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  update-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Gerar data.json a partir da planilha Google Sheets
+        run: |
+          python3 scripts/build_data.py \
+            --sheet-id "${{ secrets.SHEET_ID }}" \
+            --out data.json
+
+      - name: Commitar data.json atualizado (se houve mudança)
+        run: |
+          git config user.name "coipt-bot"
+          git config user.email "actions@users.noreply.github.com"
+          if ! git diff --quiet -- data.json; then
+            git add data.json
+            git commit -m "chore: atualiza data.json automaticamente"
+            git push
+          else
+            echo "Nenhuma mudança nos dados — nada para commitar."
+          fi
+
+      - name: Preparar artefato do Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Publicar no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
