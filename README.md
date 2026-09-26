@@ -1,93 +1,24 @@
 # Painel público da COIPT-Sinop
 
-Este pacote publica o painel "COIPT em Números" em `coipt-sinop.app`, hospedado
-gratuitamente no GitHub Pages, com os dados atualizados automaticamente a
-partir da sua planilha Google Sheets a cada 6 horas.
+Painel "COIPT em Números", hospedado gratuitamente no GitHub Pages em
+**https://norberto85.github.io/coipt-sinop/**, com os dados atualizados
+automaticamente a partir da planilha Google Sheets a cada 6 horas.
+
+**Status: já configurado e no ar.** Repositório criado, `SHEET_ID` cadastrado
+como Secret, GitHub Pages ativo, e a primeira execução automática já rodou com
+sucesso. Não usa domínio próprio pago — o link do GitHub Pages é o endereço
+definitivo do site.
 
 ## O que tem aqui
 
 ```
 coipt-sinop/
 ├── index.html                    # a página (mesma do artifact do Claude)
-├── data.json                     # dados atuais (será sobrescrito automaticamente)
+├── data.json                     # dados atuais (sobrescrito automaticamente)
 ├── coipt-claro.png, coipt-escuro.png, dre-sinop.png, govmt.png   # logos
-├── CNAME                         # diz ao GitHub Pages qual domínio usar
 ├── scripts/build_data.py         # busca a planilha e regenera data.json
 └── .github/workflows/update-data.yml   # roda o script sozinho, de tempos em tempos
 ```
-
-## Passo 1 — Criar o repositório no GitHub
-
-1. Crie uma conta no GitHub, se ainda não tiver: https://github.com/signup
-2. Clique em "New repository". Nome sugerido: `coipt-sinop`. Marque como **público**
-   (o GitHub Pages gratuito exige repositório público, a não ser que você tenha
-   um plano GitHub pago).
-3. Não inicialize com README (você vai enviar estes arquivos prontos).
-4. Faça upload de todos os arquivos desta pasta mantendo a estrutura de pastas
-   (o GitHub permite arrastar e soltar arquivos e pastas na tela do repositório,
-   ou use `git push` se preferir a linha de comando).
-
-## Passo 2 — Guardar o ID da planilha como "Secret"
-
-O script busca os dados direto da sua planilha pública. Para isso ele precisa
-saber o ID dela (o trecho da URL entre `/d/` e `/edit`):
-
-```
-https://docs.google.com/spreadsheets/d/SEU_ID_AQUI/edit
-```
-
-No repositório do GitHub:
-1. Vá em **Settings → Secrets and variables → Actions**.
-2. Clique em **New repository secret**.
-3. Nome: `SHEET_ID`
-4. Valor: o ID copiado da URL da sua planilha.
-5. Salve.
-
-**Importante sobre a planilha:** ela precisa continuar compartilhada como
-"Qualquer pessoa com o link pode **visualizar**" (a mesma configuração que já
-está sendo usada hoje). O script lê os dados pela exportação pública de CSV do
-Google Sheets — não precisa de senha nem de chave de API, mas também não
-funciona se a planilha ficar restrita.
-
-## Passo 3 — Ativar o GitHub Pages
-
-1. No repositório, vá em **Settings → Pages**.
-2. Em "Build and deployment" → "Source", selecione **GitHub Actions**
-   (não "Deploy from a branch").
-3. Pronto — o workflow em `.github/workflows/update-data.yml` cuida do resto.
-
-## Passo 4 — Rodar pela primeira vez
-
-1. Vá na aba **Actions** do repositório.
-2. Clique no workflow "Atualizar dados da COIPT e publicar no GitHub Pages".
-3. Clique em **Run workflow** (botão à direita) para disparar manualmente a
-   primeira execução, em vez de esperar pelo horário agendado.
-4. Acompanhe o log. Se tudo correr bem, ao final ele mostra o link do site
-   publicado (algo como `https://SEU-USUARIO.github.io/coipt-sinop/`).
-5. Confira se o `data.json` foi commitado com números corretos antes de seguir
-   para o domínio próprio.
-
-## Passo 5 — Apontar o domínio coipt-sinop.app
-
-Isso é feito onde você registrou o domínio `.app` (Google Domains, Registro.br,
-GoDaddy, etc. — domínios `.app` **exigem HTTPS**, e o GitHub Pages já fornece
-isso automaticamente).
-
-1. No painel de DNS do seu domínio, crie estes registros:
-
-   | Tipo  | Nome/Host | Valor |
-   |-------|-----------|-------|
-   | A     | @         | 185.199.108.153 |
-   | A     | @         | 185.199.109.153 |
-   | A     | @         | 185.199.110.153 |
-   | A     | @         | 185.199.111.153 |
-   | CNAME | www       | SEU-USUARIO.github.io |
-
-2. Volte em **Settings → Pages** no GitHub e, em "Custom domain", digite
-   `coipt-sinop.app` e salve (isso confirma o arquivo `CNAME` que já está no
-   repositório).
-3. Aguarde a propagação de DNS (de minutos a algumas horas) e marque a opção
-   **Enforce HTTPS** assim que ela ficar disponível.
 
 ## Como a atualização automática funciona
 
