@@ -1,7 +1,7 @@
 # Painel público da COIPT-Sinop
 
 Painel "COIPT em Números", hospedado gratuitamente no GitHub Pages em
-**https://norberto85.github.io/coipt-sinop/**, com os dados atualizados
+**https://datawork10.github.io/coipt-sinop/**, com os dados atualizados
 automaticamente a partir da planilha Google Sheets a cada 6 horas.
 
 **Status: já configurado e no ar.** Repositório criado, `SHEET_ID` cadastrado
