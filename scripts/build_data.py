@@ -79,14 +79,23 @@ def clean(v):
 def to_num(v, default=0.0):
     if v is None or v == "":
         return default
-    s = str(v).replace("R$", "").replace(".", "").replace(",", ".").strip()
+    s = str(v).strip()
+    # A cell formatted as percentage exports from Google Sheets as literal
+    # text like "25,00%", not as the underlying fraction (0.25) that
+    # openpyxl would have given when reading the .xlsx directly. Detect the
+    # "%" suffix and normalize back to a 0-1 fraction so downstream math
+    # (which expects a fraction, matching the original AVERAGE() formula)
+    # stays correct regardless of which path produced the number.
+    is_percent = s.endswith("%")
+    s = s.replace("R$", "").replace("%", "").replace(".", "").replace(",", ".").strip()
     try:
-        return float(s)
+        n = float(s)
     except ValueError:
         try:
-            return float(v)
+            n = float(v)
         except (TypeError, ValueError):
             return default
+    return n / 100 if is_percent else n
 
 
 def to_date(v):
@@ -207,8 +216,8 @@ def build(sheet_id):
             "escola": escola.upper(),
             "municipio": fix_municipio(r[1] if len(r) > 1 else ""),
             "processo": clean(r[2] if len(r) > 2 else ""),
-            "vigencia": vig.strftime("%d/%m/%Y") if vig else clean(r[3] if len(r) > 3 else ""),
-            "ultimoPagamento": pag.strftime("%d/%m/%Y") if pag else clean(r[4] if len(r) > 4 else ""),
+            "vigencia": vig.strftime("%d/%m/%Y") if vig else clean(r[3] if len(r) > 3 else "") or "—",
+            "ultimoPagamento": pag.strftime("%d/%m/%Y") if pag else clean(r[4] if len(r) > 4 else "") or "—",
             "tipo": clean(r[5] if len(r) > 5 else ""),
         })
     contratos_ativos = 0
@@ -217,8 +226,12 @@ def build(sheet_id):
     for r in loc_rows:
         vig = to_date(clean(r[3]) if len(r) > 3 else "")
         tipo = clean(r[5] if len(r) > 5 else "")
-        is_locacao = contains(tipo, "locacao") or contains(tipo, "locação")
-        if vig and vig > today and is_locacao:
+        # Igualdade exata com "Locação" (não "contém"): "Processo de locação
+        # iniciado" também contém a palavra "locação", mas é uma etapa de
+        # instrução, não um contrato ativo — contar por substring inflava
+        # "Contratos de locação ativos" ao somar esse registro junto.
+        is_locacao_ativa = tipo.strip().lower() == "locação" or tipo.strip().lower() == "locacao"
+        if vig and vig > today and is_locacao_ativa:
             contratos_ativos += 1
             if vig <= today + timedelta(days=90):
                 vigencias_90 += 1
