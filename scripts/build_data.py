@@ -70,6 +70,21 @@ def fix_municipio(raw):
     return MUNICIPIO_FIX.get(key, raw.strip().title())
 
 
+# Correções de grafia conhecidas na aba "Organize" da planilha (erro na fonte,
+# não no cálculo). Mantido aqui em vez de editar a planilha porque a lista de
+# processos/produtos é digitada manualmente pela equipe e pode voltar a ter o
+# mesmo erro numa edição futura; corrigir na leitura garante que o site
+# publicado sempre mostre o texto certo, mesmo que a planilha ainda não tenha
+# sido corrigida.
+PROCESSO_FIX = {
+    "Manutenção Corretivas nas Unidades Escolares": "Manutenções Corretivas nas Unidades Escolares",
+}
+
+
+def fix_processo(raw):
+    return PROCESSO_FIX.get(raw, raw)
+
+
 def clean(v):
     if v is None:
         return ""
@@ -337,7 +352,7 @@ def build(sheet_id):
     organize = []
     for r in org_rows:
         pasta = clean(r[0] if len(r) > 0 else "")
-        processo = clean(r[1] if len(r) > 1 else "")
+        processo = fix_processo(clean(r[1] if len(r) > 1 else ""))
         if not processo:
             continue
         organize.append({"pasta": pasta, "processo": processo, "servidor": clean(r[2] if len(r) > 2 else "")})
