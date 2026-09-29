@@ -165,6 +165,10 @@ section.block:last-of-type{border-bottom:none}
 .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:currentColor}
 .block h2{font-size:clamp(1.5rem,3vw,1.95rem)}
 .block .intro{color:var(--ink-muted);max-width:68ch;margin-top:10px;line-height:1.6;font-size:.98rem}
+.team-link{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:9px 16px;border-radius:999px;background:var(--teal);color:#fff;font-weight:600;font-size:.92rem;text-decoration:none}
+.team-link:hover{filter:brightness(1.06)}
+.team-link:focus-visible{outline:2px solid var(--teal-text);outline-offset:3px}
+.team-note{font-size:.8rem;color:var(--ink-faint);margin-top:6px}
 
 /* ============ CARDS / PASTA GROUPS ============ */
 .pasta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:26px}
@@ -349,6 +353,8 @@ footer{padding-block:40px;background:var(--surface-2)}
     <div class="eyebrow"><span class="dot"></span>Bens móveis e inservíveis</div>
     <h2>Patrimônio</h2>
     <p class="intro">Controle patrimonial das unidades escolares, núcleos e diretoria regional em 2026: recebimento e registro de notas fiscais de aquisições de itens permanentes; atualização do Inventário de Bens Móveis; e processos de baixa patrimonial de bens inservíveis.</p>
+    <a class="team-link" href="https://claude.ai/artifact/7iGydmhiayn9HQkz1kvC7J" target="_blank" rel="noopener">Gestão das inconsistências do Inventário 2026 →</a>
+    <p class="team-note">Acesso restrito à equipe da COIPT.</p>
     <div class="strip" id="invKpis"></div>
     <div class="toolbar">
       <input type="search" id="invSearch" placeholder="Buscar por escola…">
