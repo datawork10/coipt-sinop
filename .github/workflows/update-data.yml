@@ -2,9 +2,7 @@ name: Atualizar dados da COIPT e publicar no GitHub Pages
 
 on:
   schedule:
-    # Executa a cada 6 horas (ajuste conforme a frequência que desejar).
-    # Horário em UTC. Mato Grosso é UTC-4, então "0 */6 * * *" roda às
-    # 20h, 2h, 8h e 14h no horário de MT.
+    # Executa a cada 6 horas. Horário em UTC (MT = UTC-4): 20h, 2h, 8h e 14h em MT.
     - cron: "0 */6 * * *"
   workflow_dispatch: {}   # permite rodar manualmente pela aba "Actions" no GitHub
   push:
@@ -20,7 +18,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  update-and-deploy:
+  # 1) Atualiza os dados e prepara o pacote do site
+  update:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout do repositório
@@ -54,6 +53,26 @@ jobs:
         with:
           path: .
 
+  # 2) Publica em um job separado (padrão recomendado pelo GitHub):
+  #    evita a falha "No artifacts named github-pages were found",
+  #    que ocorre quando a publicação roda antes de o pacote ficar disponível.
+  deploy:
+    needs: update
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.retry.outputs.page_url || steps.deployment.outputs.page_url }}
+    steps:
       - name: Publicar no GitHub Pages
         id: deployment
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+
+      - name: Aguardar antes de tentar de novo
+        if: steps.deployment.outcome == 'failure'
+        run: sleep 60
+
+      - name: Publicar no GitHub Pages (2ª tentativa)
+        id: retry
+        if: steps.deployment.outcome == 'failure'
         uses: actions/deploy-pages@v4
