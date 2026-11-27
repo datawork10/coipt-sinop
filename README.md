@@ -13,9 +13,8 @@ definitivo do site.
 
 ```
 coipt-sinop/
-├── index.html                    # a página (mesma do artifact do Claude)
+├── index.html                    # a página (logos SEDUC, DRE e COIPT embutidos em base64)
 ├── data.json                     # dados atuais (sobrescrito automaticamente)
-├── coipt-claro.png, coipt-escuro.png, dre-sinop.png, govmt.png   # logos
 ├── scripts/build_data.py         # busca a planilha e regenera data.json
 └── .github/workflows/update-data.yml   # roda o script sozinho, de tempos em tempos
 ```
